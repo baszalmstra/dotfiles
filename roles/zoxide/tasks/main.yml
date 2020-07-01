@@ -1,0 +1,15 @@
+- name: Ensure we have zoxide installed
+  git:
+    repo: "{{ zoxide_repo }}"
+    dest: "{{ zoxide_git_path }}"
+    version: "{{ zoxide_version }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+
+- name: Ensure zoxide is configured via bashrc
+  template:
+    src: 200_zoxide.bashrc.j2
+    dest: ~/.bashrc.d/200_zoxide.bashrc

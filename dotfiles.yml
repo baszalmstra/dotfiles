@@ -1,6 +1,7 @@
 - name: Set up local workstation
   hosts: local
   roles:
+    - { role: bashrc.d, tags: 'bashrc' }
     - { role: git, tags: 'git' }
     - { role: apt, tags: 'apt' }
     - { role: snap, tags: 'snap' }
@@ -12,3 +13,5 @@
     - { role: i3, tags: 'i3' }
     - { role: rofi, tags: 'rofi' }
     - { role: fzf, tags: 'fzf' }
+    - { role: git-fuzzy, tags: 'git' }
+    - { role: zoxide, tags: 'zoxide' }

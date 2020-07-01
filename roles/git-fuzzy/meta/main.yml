@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: bashrc.d
+  - role: fzf

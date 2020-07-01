@@ -1,0 +1,15 @@
+- name: Ensure we have git-fuzzy installed
+  git:
+    repo: "{{ git_fuzzy_repo }}"
+    dest: "{{ git_fuzzy_git_path }}"
+    version: "{{ git_fuzzy_version }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+
+- name: Ensure git-fuzzy is on the PATH
+  template:
+    src: 200_git_fuzzy.bashrc.j2
+    dest: ~/.bashrc.d/200_git_fuzzy.bashrc

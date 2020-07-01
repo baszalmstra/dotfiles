@@ -1,0 +1,19 @@
+- name: Ensure ~/.bashrc.d directory exists
+  file:
+    state: directory
+    path: ~/.bashrc.d
+
+- name: Insert/Update bashrc.d configuration block in ~/.bashrc
+  blockinfile:
+    path: ~/.bashrc
+    block: |
+      # Load bashrc configuration from files in ~/.bashrc.d/
+      while read filename
+      do
+        source "$filename"
+      done < <(find -L ~/.bashrc.d -type f)
+
+- name: Ensure ~/.dotfiles/bin is on the PATH
+  template:
+    src: 100_dotfiles_bin_path.bashrc.j2
+    dest: ~/.bashrc.d/100_dotfiles_bin_path.bashrc

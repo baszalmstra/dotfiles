@@ -21,3 +21,6 @@
 [submodule "external/dunst"]
 	path = external/dunst
 	url = https://github.com/dunst-project/dunst.git
+[submodule "external/git-fuzzy"]
+	path = external/git-fuzzy
+	url = https://github.com/bigH/git-fuzzy.git

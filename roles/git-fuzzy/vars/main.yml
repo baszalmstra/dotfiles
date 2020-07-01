@@ -1,0 +1,4 @@
+git_fuzzy_repo: "https://github.com/bigH/git-fuzzy.git"
+git_fuzzy_version: "2f5aa9b"
+
+git_fuzzy_git_path: "{{ lookup('env','HOME') }}/.cache/git-fuzzy-git"

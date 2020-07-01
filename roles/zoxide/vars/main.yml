@@ -1,0 +1,4 @@
+zoxide_repo: "https://github.com/ajeetdsouza/zoxide.git"
+zoxide_version: "v0.4.1"
+
+zoxide_git_path: "{{ lookup('env','HOME') }}/.cache/zoxide-git"
