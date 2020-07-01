@@ -1,0 +1,4 @@
+trueline_repo: "https://github.com/petobens/trueline.git"
+trueline_version: "a1aaf95"
+
+trueline_git_path: "{{ lookup('env','HOME') }}/.cache/trueline-git"

@@ -1,0 +1,15 @@
+- name: Ensure we have trueline installed
+  git:
+    repo: "{{ trueline_repo }}"
+    dest: "{{ trueline_git_path }}"
+    version: "{{ trueline_version }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+
+- name: Ensure trueline is configured via bashrc
+  template:
+    src: trueline.bashrc.j2
+    dest: ~/.bashrc.d/50_trueline.bashrc

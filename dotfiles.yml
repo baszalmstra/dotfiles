@@ -15,3 +15,4 @@
     - { role: fzf, tags: 'fzf' }
     - { role: git-fuzzy, tags: 'git' }
     - { role: zoxide, tags: 'zoxide' }
+    - { role: trueline, tags: 'trueline' }

@@ -76,11 +76,6 @@ update:
 #
 .PHONY : bashrc 
 
-bashrc: ${HOME}/.inputrc
-	@grep -qxF 'source ~/.dotfiles/setup.bash' ~/.bashrc || ( \
-	 echo 'source ~/.dotfiles/setup.bash' >> ~/.bashrc && \
-	 echo "$(INFO_PRINT)Added bash sourcing to .bashrc$(RESET_PRINT)")
-
 ${HOME}/.inputrc: 
 	@echo "$(INFO_PRINT)Installing .inputc...$(RESET_PRINT)" && \
 	ln -sf ${HOME}/.dotfiles/.inputrc ${HOME}/.inputrc
@@ -132,12 +127,6 @@ ${HOME}/.config/dunst/dunstrc:
 #
 # Tools
 #
-
-
-zoxide: /usr/local/bin/zoxide
-
-/usr/local/bin/zoxide:
-	curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/master/install.sh | sh
 
 delta: /usr/local/bin/delta ~/.gitconfig
 
