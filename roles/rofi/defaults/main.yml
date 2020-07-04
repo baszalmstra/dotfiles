@@ -1,0 +1,22 @@
+rofi_shared_packages:
+    - libxcb1
+    - libxcb1-dev
+    - libxcb-xkb-dev
+    - libxcb-randr0-dev
+    - libxkbcommon-dev
+    - libsvgpp-dev
+    - libstartup-notification0-dev
+    - libxcb-ewmh-dev
+    - libxcb-icccm4-dev
+    - libxcb-xrm-dev
+    - libxkbcommon-x11-dev
+    - libxcb-xinerama0
+    - libxcb-xinerama0-dev
+    - librsvg2-dev
+
+rofi_build_dependencies:
+    - check
+    - flex
+    - bison
+
+    

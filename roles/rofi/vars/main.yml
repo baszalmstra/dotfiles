@@ -1,0 +1,4 @@
+rofi_git_repo: https://github.com/DaveDavenport/rofi
+rofi_git_ref: 1.5.4
+
+rofi_git_path: "{{ lookup('env','HOME') }}/.cache/rofi-git"

@@ -1,0 +1,31 @@
+- name: Install apt packages
+  apt:
+    name: "{{ picom_shared_packages + picom_build_dependencies }}"
+    autoclean: True
+    autoremove: True
+    force_apt_get: True
+    update_cache: True
+    cache_valid_time: 3600
+    install_recommends: False
+  become: yes
+  become_user: root
+  become_method: sudo
+
+- name: Ensure we have picom cloned locally
+  git:
+    repo: "{{ picom_git_repo }}"
+    dest: "{{ picom_git_path }}"
+    version: "{{ picom_git_ref }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+  notify:
+    - configure picom
+    - build picom
+    - install picom
+
+
+
+

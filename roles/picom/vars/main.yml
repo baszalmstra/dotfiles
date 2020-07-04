@@ -1,0 +1,4 @@
+picom_git_repo: https://github.com/ibhagwan/picom.git
+picom_git_ref: next
+
+picom_git_path: "{{ lookup('env','HOME') }}/.cache/picom-git"

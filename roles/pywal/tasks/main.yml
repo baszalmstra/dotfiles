@@ -1,0 +1,13 @@
+- name: Install pywal
+  pip:
+    executable: pip3
+    name: pywal
+  become: yes
+  become_user: root
+  become_method: sudo
+
+- name: Ensure git-fuzzy is on the PATH
+  template:
+    src: pywal.bashrc.j2
+    dest: ~/.bashrc.d/50_pywal.bashrc
+

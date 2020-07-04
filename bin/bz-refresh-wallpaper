@@ -11,4 +11,6 @@ wallpapers=$(
 
 echo $wallpapers
 
+wal -i $wallpapers -n 
+
 feh --no-fehbg --bg-scale $wallpapers

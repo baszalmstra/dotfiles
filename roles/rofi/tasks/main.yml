@@ -1,6 +1,6 @@
 - name: Install apt packages
   apt:
-    name: rofi
+    name: "{{ rofi_shared_packages + rofi_build_dependencies }}"
     autoclean: True
     autoremove: True
     force_apt_get: True
@@ -10,6 +10,22 @@
   become: yes
   become_user: root
   become_method: sudo
+
+- name: Ensure we have rofi cloned locally
+  git:
+    repo: "{{ rofi_git_repo }}"
+    dest: "{{ rofi_git_path }}"
+    version: "{{ rofi_git_ref }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+  notify:
+    - autoreconf rofi
+    - configure rofi
+    - build rofi
+    - install rofi
 
 - name: Create rofi config directory
   file:

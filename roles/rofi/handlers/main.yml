@@ -1,0 +1,36 @@
+- name: autoreconf rofi
+  command: "{{ item }}"
+  args:
+    chdir: "{{ rofi_git_path }}"
+    warn: false
+  with_items:
+    - rm -rf build
+    - mkdir build
+    - autoreconf -i
+
+- name: configure rofi
+  command: "{{ item }}"
+  args:
+    chdir: "{{ rofi_git_path }}/build"
+    warn: false
+  with_items:
+    - ../configure --disable-check
+
+- name: build rofi
+  command: "{{ item }}"
+  args:
+    chdir: "{{ rofi_git_path }}/build"
+    warn: false
+  with_items:
+    - make
+
+- name: install rofi
+  command: "{{ item }}"
+  args:
+    chdir: "{{ rofi_git_path }}/build"
+    warn: false
+  with_items:
+    - make install
+  become: yes
+  become_user: root
+  become_method: sudo

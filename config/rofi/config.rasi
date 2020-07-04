@@ -2,13 +2,14 @@ configuration {
     display-drun:                   "Apps";
     display-window:                 "Window";
     show-icons:true;
+    icon-theme: papirus
 }
  
 * {
     lines: 15;
-    columns: 1;
-    background-color: #00000088;
-    border-color: #00000000;
+    columns: 2;
+    background-color: #000000FF;
+    border-color: #000000FF;
     text-color: #EFEFEF;
     font: "Iosevka 11";
 }

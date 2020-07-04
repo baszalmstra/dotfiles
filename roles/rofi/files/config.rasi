@@ -1,80 +1,142 @@
+/*
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Mail : adi1090x@gmail.com
+ * Github : @adi1090x
+ * Reddit : @adi1090x
+ *
+ */
+
 configuration {
-    display-drun:                   "Apps";
-    display-window:                 "Window";
-    show-icons:true;
+    font:                           "SFNS Display Bold 10";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    drun-display-format:            "{name}";
+    threads:                        0;
+    scroll-method:                  0;
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+    theme: "~/.cache/wal/colors-rofi-dark";
 }
- 
+
 * {
-    lines: 15;
-    columns: 1;
-    background-color: #00000088;
-    border-color: #00000000;
-    text-color: #EFEFEF;
-    font: "Iosevka 11";
+    background:                     #00000000;
+    background-color:               #00000066;
+    background-entry:               #00000033;
+    background-alt:                 #f2f2f215;
+    foreground:                     #f2f2f2EE;
+    foreground-selected:            #ffffffFF;
+    urgent:                         #E91E6366;
+    urgent-selected:                #E91E6377;
 }
- 
-#window {
-    border: 0;
-    border-radius: 4px;
-    padding: 20;
-    width: 30%;
-    /*height: 50%;*/
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @foreground;
+    height:                         100%;
+    width:                          100%;
+    location:                       northwest;
+    anchor:                         northwest;
+    x-offset:                       0;
+    y-offset:                       0;
 }
- 
-#mainbox {
-    background-color: #00000000;
-    children: [inputbar, listview];
-    spacing: 10px;
-    /*margin: 20%;*/
-    padding: 0px 0;
-    border: 1px;
-    border-color: @base0D;
+
+prompt {
+    enabled: false;
 }
- 
- 
-#listview {
-    background-color: #00000000;
-    fixed-height: 0;
-    border: 0px;
-    spacing: 0px;
-    scrollbar: false;
-    padding: 10px 0px 0px;
+
+
+inputbar {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    expand:                         false;
+    border-radius:                  6px;
+    margin:                         0px 630px 0px 630px;
+    padding:                        10px 10px 10px 10px;
+    position:                       north;
 }
- 
-#element {
-    background-color: #00000000;
-    border: 0;
-    /*border-radius: 15px; */
-    padding: 8 0  8 9 ;
+
+
+entry {
+    background-color:               @background;
+    text-color:                     @foreground;
+    placeholder-color:              @foreground;
+    expand:                         true;
+    horizontal-align:               0.5;
+    placeholder:                    "Search";
+    blink:                          true;
 }
- 
-#element selected {
-    background-color: #00BCD4;
-    text-color: #EFEFEF;
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
 }
- 
- 
-#inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-    background-color: #00000000;
+
+
+listview {
+    background-color:               @background;
+    columns:                        7;
+    spacing:                        4px;
+    cycle:                          false;
+    dynamic:                        true;
+    layout:                         vertical;
 }
- 
-#case-indicator {
-    background-color: #00000000;
-    spacing:    0;
+
+mainbox {
+    background-color:               @background-color;
+    children:                       [ inputbar, listview ];
+    spacing:                        25px;
+    padding:                        70px 135px 55px 135px;
 }
-#entry {
-    background-color: #00000000;
-    spacing:    0;
+
+element {
+    background-color:               @background;
+    text-color:                     @foreground;
+    orientation:                    vertical;
+    border-radius:                  9px;
+    padding:                        20px 0px 20px 0px;
 }
-#prompt {
-    background-color: #00000000;
-    spacing:    0;
+
+element-icon {
+    size:                           65px;
+    border:                         0px;
 }
- 
-#textbox-prompt-colon {
-    background-color: #00000000;
-    expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
+
+element-text {
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         5px 10px 0px 10px;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @urgent;
+    text-color:                     @foreground;
+    border-radius:                  9px;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+}
+
+element selected {
+    background-color:               @background-alt;
+    text-color:                     @foreground-selected;
+}
+
+element selected.urgent {
+    background-color:               @urgent-selected;
+    text-color:                     @foreground;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground-selected;
 }
