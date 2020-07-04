@@ -1,3 +1,10 @@
+# Add specified repository into sources list.
+- apt_repository:
+    repo: ppa:papirus/papirus
+  become: yes
+  become_user: root
+  become_method: sudo
+
 - name: Install apt packages
   apt:
     name: "{{ rofi_shared_packages + rofi_build_dependencies }}"

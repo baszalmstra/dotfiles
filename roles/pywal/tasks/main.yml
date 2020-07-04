@@ -1,13 +1,13 @@
-- name: Install pywal
+- name: Install wpgtk
   pip:
     executable: pip3
-    name: pywal
+    name: wpgtk
   become: yes
   become_user: root
   become_method: sudo
 
-- name: Ensure git-fuzzy is on the PATH
-  template:
-    src: pywal.bashrc.j2
-    dest: ~/.bashrc.d/50_pywal.bashrc
+# - name: Ensure pywal is loaded
+#   template:
+#     src: pywal.bashrc.j2
+#     dest: ~/.bashrc.d/50_pywal.bashrc
 

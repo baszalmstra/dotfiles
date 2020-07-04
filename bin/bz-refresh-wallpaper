@@ -6,11 +6,13 @@ wallpapers=$(
     xrandr | grep ' connected' | while read monitor ; do
         ~/.dotfiles/bin/bz-fetch-wallpaper &
     done
+    #~/.dotfiles/bin/bz-fetch-wallpaper &
     wait
 )
 
 echo $wallpapers
 
-wal -i $wallpapers -n 
+#wal -i $wallpapers -n -g
+#wpg -s $wallpapers
 
 feh --no-fehbg --bg-scale $wallpapers

@@ -13,6 +13,7 @@ rofi_shared_packages:
     - libxcb-xinerama0
     - libxcb-xinerama0-dev
     - librsvg2-dev
+    - papirus-icon-theme
 
 rofi_build_dependencies:
     - check
