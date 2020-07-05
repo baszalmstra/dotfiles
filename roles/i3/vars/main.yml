@@ -4,7 +4,6 @@ i3_gaps_git_url: https://github.com/Airblader/i3
 i3_gaps_shared_packages:
   - i3status
   - feh
-  - i3lock 
   - i3blocks
   - suckless-tools
 
@@ -32,4 +31,13 @@ i3_gaps_build_dependencies:
   - libxcb-randr0-dev
   - libxcb-xrm0
   - libxcb-xrm-dev
+  - pkg-config
+  - libpam0g-dev
+  - libcairo2-dev
+  - libfontconfig1-dev
+  - libxcb-composite0-dev
+  - libx11-xcb-dev
+  - libxcb-image0-dev
+  - libxcb-util-dev
+  - libjpeg-dev
 

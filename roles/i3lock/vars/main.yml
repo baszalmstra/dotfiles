@@ -1,0 +1,4 @@
+i3lock_git_repo: https://github.com/Raymo111/i3lock-color.git
+i3lock_git_ref: 2.12.c.4
+
+i3lock_git_path: "{{ lookup('env','HOME') }}/.cache/i3lock-color-git"

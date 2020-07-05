@@ -1,0 +1,21 @@
+- name: build i3lock
+  command: "{{ item }}"
+  args:
+    chdir: "{{ i3lock_git_path }}"
+    warn: false
+  with_items:
+    - chmod +x build.sh
+    - ./build.sh
+
+- name: install i3lock
+  command: "{{ item }}"
+  args:
+    chdir: "{{ i3lock_git_path }}"
+    warn: false
+  with_items:
+    - chmod +x install-i3lock-color.sh
+    - ./install-i3lock-color.sh
+  become: yes
+  become_user: root
+  become_method: sudo
+  

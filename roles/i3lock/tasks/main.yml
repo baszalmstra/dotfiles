@@ -1,0 +1,30 @@
+- name: Install apt packages
+  apt:
+    name: "{{ i3lock_shared_packages + i3lock_build_dependencies }}"
+    autoclean: True
+    autoremove: True
+    force_apt_get: True
+    update_cache: True
+    cache_valid_time: 3600
+    install_recommends: False
+  become: yes
+  become_user: root
+  become_method: sudo
+
+- name: Ensure we have i3lock cloned locally
+  git:
+    repo: "{{ i3lock_git_repo }}"
+    dest: "{{ i3lock_git_path }}"
+    version: "{{ i3lock_git_ref }}"
+    clone: True
+    force: True
+    recursive: True
+    update: True
+    depth: 1
+  notify:
+    - build i3lock
+    - install i3lock
+
+
+
+

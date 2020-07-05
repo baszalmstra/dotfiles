@@ -21,8 +21,8 @@ configuration {
 	  sidebar-mode: 					        false;
 
     location:                       5;
-    xoffset:                        -20;
-    yoffset:                        -50;
+    xoffset:                        -5;
+    yoffset:                        -32;
 }
 
 * {

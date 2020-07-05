@@ -1,8 +1,50 @@
 #!/bin/bash
 
+B='#11111188'  # blank
+C='#00000000'  # clear ish
+D='#344066cc'  # default
+T='#fefefeff'  # text
+W='#880000bb'  # wrong
+V='#5680eecc'  # verifying
+
 lock() {
     ~/.dotfiles/bin/bz-refresh-wallpaper &
-    i3lock -c 09111A --ignore-empty-password
+    i3lock \
+        \
+        --color=$B \
+        --ignore-empty-password \
+        --radius=150 \
+        \
+        --time-font=Iosevka \
+        --date-font=Iosevka \
+        --layout-font=Iosevka \
+        --verif-font=Iosevka \
+        --wrong-font=Iosevka \
+        --greeter-font=Iosevka \
+        \
+        --insidevercolor=$C   \
+        --ringvercolor=$V     \
+        \
+        --insidewrongcolor=$C \
+        --ringwrongcolor=$W   \
+        \
+        --insidecolor=$C      \
+        --ringcolor=$D        \
+        --linecolor=$B        \
+        --separatorcolor=$D   \
+        \
+        --verifcolor=$T        \
+        --wrongcolor=$T        \
+        --timecolor=$T        \
+        --datecolor=$T        \
+        --layoutcolor=$T      \
+        --keyhlcolor=$V       \
+        --bshlcolor=$V        \
+        \
+        --clock               \
+        --indicator           \
+        --timestr="%H:%M:%S"  \
+        --datestr="%A, %m %Y"          
 }
 
 case "$1" in
