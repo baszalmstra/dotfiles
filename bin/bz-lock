@@ -1,8 +1,7 @@
 #!/bin/bash
 
-~/.dotfiles/bin/bz-refresh-wallpaper &
-
 lock() {
+    ~/.dotfiles/bin/bz-refresh-wallpaper &
     i3lock -c 09111A --ignore-empty-password
 }
 
@@ -14,7 +13,10 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        lock && systemctl suspend
+        lock
+        # mpc -q pause
+        # amixer set Master mute
+        systemctl suspend
         ;;
     hibernate)
         lock && systemctl hibernate

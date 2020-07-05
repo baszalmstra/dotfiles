@@ -1,7 +1,7 @@
-- name: Install wpgtk
+- name: Install pywal
   pip:
     executable: pip3
-    name: wpgtk
+    name: pywal
   become: yes
   become_user: root
   become_method: sudo

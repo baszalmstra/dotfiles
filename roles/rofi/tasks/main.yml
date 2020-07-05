@@ -1,5 +1,6 @@
 # Add specified repository into sources list.
-- apt_repository:
+- name: Install apt repositories
+  apt_repository:
     repo: ppa:papirus/papirus
   become: yes
   become_user: root
@@ -34,14 +35,8 @@
     - build rofi
     - install rofi
 
-- name: Create rofi config directory
+- name: Symlink rofi configs
   file:
-    path: "~/.config/rofi"
-    state: directory
-    mode: "0755"
-
-- name: Symlink rofi config
-  file:
-    src: "{{ dotfiles_home }}/roles/rofi/files/config.rasi"
-    dest: "~/.config/rofi/config.rasi"
+    src: "{{ dotfiles_home }}/roles/rofi/files/config"
+    dest: "~/.config/rofi"
     state: link

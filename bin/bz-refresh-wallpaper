@@ -10,9 +10,7 @@ wallpapers=$(
     wait
 )
 
-echo $wallpapers
-
-#wal -i $wallpapers -n -g
+#wal -i $wallpapers -n -g -s -t
 #wpg -s $wallpapers
 
 feh --no-fehbg --bg-scale $wallpapers

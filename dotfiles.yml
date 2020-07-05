@@ -11,7 +11,7 @@
     - { role: code, tags: 'code' }
     - { role: bat, tags: 'bat' }
     - { role: i3, tags: 'i3' }
-    #- { role: pywal, tags: 'pywal' }
+    - { role: pywal, tags: 'pywal' }
     - { role: picom, tags: 'picom' }
     - { role: rofi, tags: 'rofi' }
     - { role: fzf, tags: 'fzf' }
