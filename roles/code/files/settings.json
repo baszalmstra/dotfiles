@@ -56,9 +56,10 @@
         }
     ],
     "workbench.colorTheme": "One Monokai",
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 3,
     "workbench.iconTheme": "vscode-icons",
     "vsicons.dontShowNewVersionMessage": true,
     "files.insertFinalNewline": true,
-    "typescript.updateImportsOnFileMove.enabled": "always"
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDelete": false
 }
