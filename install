@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -60)" ]; then
+  sudo apt get update
+fi
+
+#==============
+# Functions
+#==============
+function is_executable {
+  if [[ -n $ZSH_VERSION ]]; then
+    builtin whence "$1" &> /dev/null
+  else  # bash:
+    builtin type "$1" &> /dev/null
+  fi
+}
+
+#==============
+# Variables
+#==============
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+#=============
+# Install utilities
+#==============
+hash curl 2>/dev/null           || missing_packages="${missing_packages} curl"
+hash stow 2>/dev/null           || missing_packages="${missing_packages} stow"
+hash bsdtar 2>/dev/null         || missing_packages="${missing_packages} libarchive-tools"
+hash git-undo 2>/dev/null       || missing_packages="${missing_packages} git-extras"
+[ -z "$missing_packages" ]      || sudo apt install -y $missing_packages
+
+#==============
+# Link common config
+#==============
+stow bash
+stow alacritty
+
+#==============
+# Fonts
+#==============
+if [ ! -d "$HOME/.fonts/Iosevka" ]; then
+    mkdir -p "$HOME/.fonts/Iosevka"
+    curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xvf-
+    sudo fc-cache -f -v
+fi
