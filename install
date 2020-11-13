@@ -2,19 +2,60 @@
 
 set -e
 
-if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -60)" ]; then
-  sudo apt get update
-fi
+
 
 #==============
 # Functions
 #==============
-function is_executable {
-  if [[ -n $ZSH_VERSION ]]; then
-    builtin whence "$1" &> /dev/null
-  else  # bash:
-    builtin type "$1" &> /dev/null
-  fi
+is_exists() {
+    which "$1" >/dev/null 2>&1
+    return $?
+}
+
+write_newline() {
+    printf "\n"
+}
+
+write_header() {
+    printf " \033[37;1m%s\033[m\n" "$*"
+}
+
+write_error() {
+    printf "\r \033[31m✖ \033[37;1m%s\033[m\n" "$*"
+}
+
+write_warning() {
+    printf " \033[31m%s\033[m\n" "$*"
+}
+
+write_done() {
+    printf "\r \033[32m✔ \033[37;1m%s\033[m\n" "$*"
+}
+
+write_pending() {
+    printf " \033[37;1m%s\033[m... " "➜ $*"
+}
+
+queue_packages() {
+    missing_packages="${missing_packages+$missing_packages }$*"
+}
+
+symlink_config() {
+    write_pending "symlinking $1 config"
+    stow "$1"
+    write_done "symlinking $1 config"
+}
+
+install_queued_packages() {
+    if [ -n "$missing_packages" ]; then 
+        if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -60)" ]; then
+            write_pending "updating apt"
+            (sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq > /dev/null && write_done "updating apt") || write_error "updating apt"
+        fi
+        write_pending "installing packages: $missing_packages"
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq $missing_packages < /dev/null > /dev/null
+        write_done "installing packages: $missing_packages"
+    fi
 }
 
 #==============
@@ -25,23 +66,26 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #=============
 # Install utilities
 #==============
-hash curl 2>/dev/null           || missing_packages="${missing_packages} curl"
-hash stow 2>/dev/null           || missing_packages="${missing_packages} stow"
-hash bsdtar 2>/dev/null         || missing_packages="${missing_packages} libarchive-tools"
-hash git-undo 2>/dev/null       || missing_packages="${missing_packages} git-extras"
-[ -z "$missing_packages" ]      || sudo apt install -y $missing_packages
+is_exists "curl"     || queue_packages "curl"
+is_exists "stow"     || queue_packages "stow"
+is_exists "git-undo" || queue_packages "git-extras"
+
+# Install all missing packages
+install_queued_packages
 
 #==============
 # Link common config
 #==============
-stow bash
-stow alacritty
+symlink_config bash
+symlink_config alacritty
 
 #==============
 # Fonts
 #==============
 if [ ! -d "$HOME/.fonts/Iosevka" ]; then
+    write_pending "installing Isosvka font"
     mkdir -p "$HOME/.fonts/Iosevka"
-    curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xvf-
-    sudo fc-cache -f -v
+    curl -soL "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xf-
+    sudo fc-cache -f > /dev/null
+    write_done "installing Isosvka font"
 fi
