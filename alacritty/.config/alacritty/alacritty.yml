@@ -593,7 +593,9 @@ mouse_bindings:
 # a no-op if you do not wish to receive input characters for that binding.
 key_bindings:
   # (Windows/Linux only)
-  - { key: V,        mods: Control, action: Paste            }
+  - { key: V,        mods: Control,       action: Paste            }
+  - { key: N,        mods: Control|Shift, action: SpawnNewInstance }
+
   # - { key: C,        mods: Control, action: Copy             }
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }
