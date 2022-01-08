@@ -58,6 +58,30 @@ install_queued_packages() {
     fi
 }
 
+webi_update_or_install() {
+    write_pending "updating $1"
+    curl -sS https://webinstall.dev/zoxide | bash >/dev/null
+    write_done "updating $1"
+}
+
+update_or_install_starship() {
+    write_pending "updating starship"
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --force --yes >/dev/null
+    write_done "updating starship"
+}
+
+install_rustup() {
+    write_pending "installing rustup"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y >/dev/null
+    write_done "installing rustup"
+}
+
+install_delta() {
+    write_pending "installing delta"
+    cargo install --force --locked git-delta >/dev/null
+    write_done "installing delta"
+}
+
 #==============
 # Variables
 #==============
@@ -69,15 +93,25 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 is_exists "curl"     || queue_packages "curl"
 is_exists "stow"     || queue_packages "stow"
 is_exists "git-undo" || queue_packages "git-extras"
+is_exists "nvim"     || queue_packages "neovim"
 
-# Install all missing packages
 install_queued_packages
+
+is_exists "cargo"    || install_rustup
+is_exists "delta"    || install_delta
+
+webi_update_or_install fzf
+webi_update_or_install zoxide
+update_or_install_starship
 
 #==============
 # Link common config
 #==============
 symlink_config bash
 symlink_config alacritty
+symlink_config starship
+symlink_config zoxide
+symlink_config git
 
 #==============
 # Fonts
