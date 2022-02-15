@@ -60,7 +60,7 @@ install_queued_packages() {
 
 webi_update_or_install() {
     write_pending "updating $1"
-    curl -sS https://webinstall.dev/zoxide | bash >/dev/null
+    curl -sS https://webinstall.dev/$1 | bash >/dev/null
     write_done "updating $1"
 }
 
