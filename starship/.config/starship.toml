@@ -27,3 +27,9 @@ style = "bold red"
 
 [gcloud]
 disabled = true
+
+[cmake]
+disabled = true
+
+[python]
+disabled = true
