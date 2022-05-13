@@ -42,6 +42,7 @@ queue_packages() {
 
 symlink_config() {
     write_pending "symlinking $1 config"
+    mkdir -p "$HOME/.config/$1"
     stow "$1"
     write_done "symlinking $1 config"
 }
@@ -94,15 +95,17 @@ is_exists "curl"     || queue_packages "curl"
 is_exists "stow"     || queue_packages "stow"
 is_exists "git-undo" || queue_packages "git-extras"
 is_exists "nvim"     || queue_packages "neovim"
+is_exists "bsdtar"   || queue_packages "libarchive-tools"
+is_exists "alacritty"|| queue_packages "alacritty"
 
 install_queued_packages
 
 is_exists "cargo"    || install_rustup
 is_exists "delta"    || install_delta
 
-webi_update_or_install fzf
-webi_update_or_install zoxide
-update_or_install_starship
+is_exists "fzf"      || webi_update_or_install fzf
+is_exists "zoxide"   || webi_update_or_install zoxide
+is_exists "starship" || update_or_install_starship
 
 #==============
 # Link common config
@@ -112,11 +115,12 @@ symlink_config alacritty
 symlink_config starship
 symlink_config zoxide
 symlink_config git
+symlink_config helix
 
 #==============
 # Fonts
 #==============
-if [ ! -d "$HOME/.fonts/Iosevka" ]; then
+if ! fc-list | grep -q Iosevka; then
     write_pending "installing Isosvka font"
     mkdir -p "$HOME/.fonts/Iosevka"
     curl -soL "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xf-

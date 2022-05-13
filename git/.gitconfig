@@ -9,7 +9,7 @@
 [pull]
     rebase = true
 [core]
-    editor = nvim
+    editor = hx
 [gitsu]
     defaultSelectScope = global
 
