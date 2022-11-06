@@ -96,7 +96,10 @@ is_exists "stow"     || queue_packages "stow"
 is_exists "git-undo" || queue_packages "git-extras"
 is_exists "nvim"     || queue_packages "neovim"
 is_exists "bsdtar"   || queue_packages "libarchive-tools"
-is_exists "alacritty"|| queue_packages "alacritty"
+
+if [[ ! $(grep microsoft /proc/version) ]]; then
+    is_exists "alacritty"|| queue_packages "alacritty"
+fi
 
 install_queued_packages
 
@@ -120,10 +123,14 @@ symlink_config helix
 #==============
 # Fonts
 #==============
-if ! fc-list | grep -q Iosevka; then
-    write_pending "installing Isosvka font"
-    mkdir -p "$HOME/.fonts/Iosevka"
-    curl -soL "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xf-
-    sudo fc-cache -f > /dev/null
-    write_done "installing Isosvka font"
+if [[ ! $(grep microsoft /proc/version) ]]; then
+    if ! fc-list | grep -q Iosevka; then
+        write_pending "installing Isosvka font"
+        mkdir -p "$HOME/.fonts/Iosevka"
+        curl -soL "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip" | bsdtar -C "$HOME/.fonts/Iosevka" -xf-
+        sudo fc-cache -f > /dev/null
+        write_done "installing Isosvka font"
+    fi
 fi
+
+
